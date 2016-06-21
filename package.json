@@ -1,0 +1,27 @@
+{
+  "name": "language-parser",
+  "version": "1.0.0",
+  "description": "Langause parser given English sentence.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha tests/*test.js"
+  },
+  "dependencies":{
+    "lodash": "*",
+    "jison":"*"
+  },
+  "devDependencies":{
+    "chai": "*",
+    "mocha": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/last-stand/language-parser.git"
+  },
+  "author": "Jai",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/last-stand/language-parser/issues"
+  },
+  "homepage": "https://github.com/last-stand/language-parser#readme"
+}
