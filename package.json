@@ -4,7 +4,8 @@
   "description": "Langause parser given English sentence.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha tests/*test.js"
+    "test": "mocha tests/*test.js",
+    "preinstall": "npm install jison -g"
   },
   "dependencies":{
     "lodash": "*",
