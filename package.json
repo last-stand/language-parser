@@ -17,12 +17,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/last-stand/language-parser.git"
+    "url": "git+https://github.com/last-stand/language-translator.git"
   },
   "author": "Jai",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/last-stand/language-parser/issues"
+    "url": "https://github.com/last-stand/language-translator/issues"
   },
-  "homepage": "https://github.com/last-stand/language-parser#readme"
+  "homepage": "https://github.com/last-stand/language-translator#readme"
 }

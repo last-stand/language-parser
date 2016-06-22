@@ -1,7 +1,7 @@
 = Language Translator
 
 == Description
-Language translator translates *English* language sentences into *Hindi*. It uses javascript parser link:Jison[http://zaa.ch/jison/] for parsing English sentences and then convert it to Hindi sentenses.
+Language translator translates *English* language sentences into *Hindi*. It uses javascript parser link:http://zaa.ch/jison/[Jison] for parsing English sentences and then convert it to Hindi sentenses.
 
 == Settings to run project:
 
