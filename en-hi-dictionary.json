@@ -1,0 +1,19 @@
+[
+  {"noun": {"proper":[{"en":"Oggy","hi":"औगी"},
+                      {"en":"Tom","hi":"टॉम"},
+                      {"en":"Vodqa","hi":"वोडका"}],
+            "common":[{"en":"Lion","hi":"शेर"},
+                      {"en":"Deer","hi":"हिरन"},
+                      {"en":"Fish","hi":"मछली"}]
+          }
+  },
+  {"pronoun": [{"en":"He","hi":"वह"},
+              {"en":"She","hi":"वह"},
+              {"en":"It","hi":"वह"}]
+  },
+  {"verb": [{"en":"drinks","hi":"पीता है"},
+            {"en":"eats","hi":"खाता है"},
+            {"en":"hunts","hi":"शिकार करता है"}]
+  },
+  {"fullstop": "|"}
+]

@@ -10,3 +10,4 @@ var getParsedData = function() {
 }
 
 var parsedData = getParsedData();
+console.log(parsedData);

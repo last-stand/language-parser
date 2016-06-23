@@ -6,10 +6,10 @@
 
 \s+                                      /* skip whitespace */
 ('Oggy'|'Tom'|'Vodqa')                    return 'PROPER'
-('Wolf'|'Deer'|'Fish')                    return 'COMMON'
+('Lion'|'Deer'|'Fish')                    return 'COMMON'
 ('He'|'She'|'It')                         return 'PRONOUN'
 ('eats'|'drinks'|'hunts')                 return 'VERB'
-"."                                       return 'DOT'
+"."                                       return 'FULLSTOP'
 <<EOF>>                                   return 'EOF'
 
 /lex
@@ -28,9 +28,9 @@ SENTENCES: SENTENCE
         | SENTENCES SENTENCE
           {$$ = $1.concat([{'sentence':$2}]);}
         ;
-SENTENCE: SUBJECT PREDICATE DOT
+SENTENCE: SUBJECT PREDICATE FULLSTOP
         {$$ = [{'subject':$1, 'predicate':$2, 'fullstop':$3}];}
-      | SUBJECT PREDICATE OBJECT DOT
+      | SUBJECT PREDICATE OBJECT FULLSTOP
         {$$ = [{'subject':$1, 'predicate':$2, 'object':$3, 'fullstop':$4}];}
       ;
 SUBJECT: NOUN
