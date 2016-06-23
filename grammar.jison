@@ -5,8 +5,8 @@
 %%
 
 \s+                                      /* skip whitespace */
-('Oggy'|'Tom'|'India'|'New Delhi')        return 'PROPER'
-('Wolf'|'Dog'|'Fish')                     return 'COMMON'
+('Oggy'|'Tom'|'Vodqa')                    return 'PROPER'
+('Wolf'|'Deer'|'Fish')                    return 'COMMON'
 ('He'|'She'|'It')                         return 'PRONOUN'
 ('eats'|'drinks'|'hunts')                 return 'VERB'
 "."                                       return 'DOT'
@@ -14,17 +14,25 @@
 
 /lex
 
-%start SENTENCE
+%start PARAGRAPH
 
 %% /* language grammar */
 
-SENTENCE: EOF
+PARAGRAPH: EOF
         { console.log("Provide text file to translate."); return $1; }
-    | SUBJECT PREDICATE DOT EOF
-      {return {'subject':$1, 'predicate':$2, 'fullstop':$3};}
-    | SUBJECT PREDICATE OBJECT DOT EOF
-      {return {'subject':$1, 'predicate':$2, 'object':$3, 'fullstop':$4};}
-    ;
+      | SENTENCES EOF
+        {return $1;}
+      ;
+SENTENCES: SENTENCE
+          {$$ = [{'sentence':$1}];}
+        | SENTENCES SENTENCE
+          {$$ = $1.concat([{'sentence':$2}]);}
+        ;
+SENTENCE: SUBJECT PREDICATE DOT
+        {$$ = [{'subject':$1, 'predicate':$2, 'fullstop':$3}];}
+      | SUBJECT PREDICATE OBJECT DOT
+        {$$ = [{'subject':$1, 'predicate':$2, 'object':$3, 'fullstop':$4}];}
+      ;
 SUBJECT: NOUN
         {$$ = {'noun':$1}}
       | PRONOUN
