@@ -1,0 +1,30 @@
+{
+    "lex": {
+        "rules": [
+           ["\\s+",                    "/* skip whitespace */"],
+           ["noun",                     "return 'NOUN';"],
+           ["verb",                     "return 'VERB';"],
+           ["pronoun",                  "return 'PRONOUN';"],
+           [".",                        "return 'FULLSTOP';"],
+           ["$",                        "return 'EOF';"]
+        ]
+    },
+
+    "bnf": {
+      "PARAGRAPH": [["EOF",  "console.log('Provide text file to translate.'); return $1;" ],
+                    ["SENTENCES EOF", "return $1;"]
+                  ],
+
+      "SENTENCES": [["SENTENCE", "$$ = [{'sentence':$1}];"],
+                    ["SENTENCES SENTENCE", "$$ = $1.concat([{'sentence':$2}]);"]],
+
+      "SENTENCE": [["SUBJECT VERB FULLSTOP", "$$ = [{'subject':$1, 'verb':$2, 'fullstop':$3}];"],
+                    ["SUBJECT VERB OBJECT FULLSTOP", "$$ = [{'subject':$1, 'verb':$2, 'object':$3, 'fullstop':$4}];"]],
+
+      "SUBJECT": [["NOUN", "$$ = {'noun':$1}"],
+                  ["PRONOUN", "$$ = {'pronoun':$1}"]],
+
+      "OBJECT": [["NOUN", "$$ = {'noun':$1}"],
+                  ["PRONOUN", "$$ = {'pronoun':$1}"]]
+    }
+}
