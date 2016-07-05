@@ -1,0 +1,10 @@
+{
+  "en":[
+    ["subject", "verb", "fullstop"],
+    ["subject", "verb", "object", "fullstop"]
+  ],
+  "hi":[
+    ["subject", "verb", "fullstop"],
+    ["subject", "object", "verb", "fullstop"]
+  ]
+}

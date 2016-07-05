@@ -1,13 +1,11 @@
 var fs = require("fs");
-var ERROR_TEMPLATE = 'error: _FILE_: No such file or directory';
-var main = require('./grammar.js').main;
-var inputFile = process.argv.slice(1);
+var utils = require("./utils").utils;
+var inputText = fs.readFileSync(process.argv[2]).toString();
+// var grammarFile = process.argv[3];
+// var rulesFile = process.argv[4];
+var grammarFile = './grammar.json';
+var rulesFile = './rules.json';
 
-var getParsedData = function() {
-  if(fs.existsSync(inputFile[1]))
-      return main(inputFile);
-    console.log(ERROR_TEMPLATE.replace(/_FILE_/,inputFile[1]));
-}
-
-var parsedData = getParsedData();
+var parser = utils.generateParser(grammarFile, rulesFile);
+var parsedData = parser.parse(inputText);
 console.log(JSON.stringify(parsedData));

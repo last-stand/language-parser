@@ -1,10 +1,19 @@
 {
-  "en":[
-    "SUBJECT PREDICATE FULLSTOP",
-    "SUBJECT PREDICATE OBJECT FULLSTOP"
-  ],
-  "hi":[
-    "SUBJECT PREDICATE FULLSTOP",
-    "SUBJECT OBJECT PREDICATE FULLSTOP"
-  ]
+  "rules":[
+          ["\\s+",                    "/* skip whitespace */"],
+          ["Oggy",                      "return 'NOUN';"],
+          ["Tom",                       "return 'NOUN';"],
+          ["water",                     "return 'NOUN';"],
+          ["lion",                      "return 'NOUN';"],
+          ["deer",                      "return 'NOUN';"],
+          ["fish",                      "return 'NOUN';"],
+          ["drinks",                    "return 'VERB';"],
+          ["eats",                      "return 'VERB';"],
+          ["hunts",                     "return 'VERB';"],
+          ["he",                        "return 'PRONOUN';"],
+          ["she",                       "return 'PRONOUN';"],
+          ["it",                        "return 'PRONOUN';"],
+          [".",                        "return 'FULLSTOP';"],
+          ["$",                        "return 'EOF';"]
+        ]
 }
