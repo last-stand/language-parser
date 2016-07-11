@@ -3,12 +3,13 @@ var fs = require('fs');
 var jison = require('jison');
 var ERROR_TEMPLATE = 'error: _FILE_: No such file or directory';
 var dictionaryFile = './en-hi-dictionary.json';
+var redColor = '\x1b[31m%s\x1b[0m';
 var utils = {};
 
 utils.jsonParser = function(filename){
   if(fs.existsSync(filename))
       return JSON.parse(fs.readFileSync(filename,'utf-8'));
-  console.log(ERROR_TEMPLATE.replace(/_FILE_/,filename));
+  console.log(redColor, ERROR_TEMPLATE.replace(/_FILE_/,filename));
 }
 
 var generateGrammar = function(grammarFile, rulesFile){
@@ -36,19 +37,27 @@ var languageRuleMapper = function(targetLangRules, sourceLangParsedData){
 }
 var languageWordMapper = function(targetLangRules, sourceLangParsedData){
     var mappedRules = languageRuleMapper(targetLangRules, sourceLangParsedData);
-    _.map(sourceLangParsedData.sentences, function(sentence){
-      var subject = getTargetWord(sentence.subject.noun || sentence.subject.pronoun);
-      var verb = getTargetWord(sentence.verb);
-      var object = getTargetWord(sentence.object.noun || sentence.object.pronoun);
-      var fullstop  = getTargetWord(sentence.fullstop);
-      ///
+    var translatedSentences = _.map(sourceLangParsedData.sentences, function(sentence, index){
+      var newSentence = {};
+      newSentence.subject = getTargetWord(sentence.subject && (sentence.subject.noun || sentence.subject.pronoun));
+      newSentence.verb = getTargetWord(sentence.verb);
+      newSentence.object = getTargetWord(sentence.object && (sentence.object.noun || sentence.object.pronoun));
+      newSentence.fullstop  = getTargetWord(sentence.fullstop);
+      return applyLanguageRules(newSentence, mappedRules, index).join(' ');
     });
+    return translatedSentences.join(' ');
+}
+
+var applyLanguageRules = function(newSentence, mappedRules, index){
+    return _.reduce(mappedRules[index], function(sentence, partsOfSpeech){
+        return sentence.concat(newSentence[partsOfSpeech]);
+    }, []);
 }
 
 var getTargetWord = function(sourceWord){
   var dictionary = utils.jsonParser(dictionaryFile);
   return _.reduce(dictionary.words, function(word, allWords){
-      return _.isEqual(allWords['en'], sourceWord) ? allWord['hi']] : word;
+      return _.isEqual(allWords['en'], sourceWord) ? allWords['hi'] : word;
   }, null);
 }
 
@@ -60,7 +69,7 @@ utils.langConvertor = function(targetLanguageType, sourceLangParsedData, langStr
     var langStructure = utils.jsonParser(langStructureFile);
     if(targetLanguageType)
       return languageWordMapper(langStructure[targetLanguageType], sourceLangParsedData);
-    console.log('Please mention proper target language.');
+    console.log(redColor, 'Please mention proper target language.');
 }
 
 exports.utils = utils;

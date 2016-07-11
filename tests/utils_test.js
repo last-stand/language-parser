@@ -16,4 +16,12 @@ describe('| language translator |',function(){
         done();
   		});
     })
+
+    describe("# English to Hindi translator",function(){
+  		it("should return ' शेर शिकार करता है |'",function(done){
+        var parsedData = parser.parse('lion hunts.');
+        expect(utils.langConvertor(targetLanguageType, parsedData, langStructureFile)).to.equal('शेर शिकार करता है |');
+        done();
+  		});
+    })
 });

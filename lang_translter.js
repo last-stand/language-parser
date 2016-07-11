@@ -1,11 +1,16 @@
 var fs = require("fs");
 var utils = require("./utils").utils;
-var inputText = fs.readFileSync(process.argv[2]).toString();
-// var grammarFile = process.argv[3];
-// var rulesFile = process.argv[4];
+var input = process.argv[2];
+var inputText = fs.existsSync(input) ? fs.readFileSync(input).toString() : input;
+
 var grammarFile = './grammar.json';
 var rulesFile = './rules.json';
 
+var parser = utils.generateParser('./grammar.json', './rules.json');
+var langStructureFile = './lang_structure.json';
+var targetLanguageType = 'hi';
+
 var parser = utils.generateParser(grammarFile, rulesFile);
 var parsedData = parser.parse(inputText);
-console.log(JSON.stringify(parsedData));
+var translatedData = utils.langConvertor(targetLanguageType, parsedData, langStructureFile);
+console.log(translatedData);
