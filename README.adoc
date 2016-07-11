@@ -9,14 +9,24 @@ Run the *npm install*.
 
 === 1. grammar.json :
 
-In this file we give context-free grammar. After executing this file with Jison, it outputs a JavaScript file(in this case grammar.js) capable of parsing the language described by that grammar. We can use the generated script to parse inputs and accept, reject or perform actions. To generate script from grammar.json file run the give command to the terminal:
-----
-jison grammar.json
-----
+In this file we have given context-free grammar. It is used to parse the input data described by that grammar.
 
-=== 2. lang_translater :
+=== 2. lang_structure.json :
 
-This is the main file where we use our generated JavaScript file by grammar.json. It takes as file with valid English sentences(here it is *sampleText*)in it and performs translation on it. To run this use the given command to the terminal:
+Here, we have described the possible sentence structures for different languages(here it is for *Hindi* & *English*).
+
+=== 3. en-hi-dictionary :
+
+This is just a dictionary file where we have stored possible words in different languages.
+
+=== 4. lang_translater :
+
+It takes as file with valid English sentences(here it is *sampleText*)in it and performs translation on it. To run this use the given command to the terminal:
 ----
 node lang_translter.js sampleText
 ----
+OR We can provide input from console.
+----
+node lang_translter.js 'Oggy eats fish. deer drinks water.'
+----
+*Note:* This application is tightly bound to its grammar, rules and language-structure provided to it. It is case sensitive as well.

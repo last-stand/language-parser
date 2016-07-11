@@ -11,7 +11,7 @@
     },
 
     "bnf": {
-      "PARAGRAPH": [["EOF",  "console.log('Provide text file to translate.'); return $1;" ],
+      "PARAGRAPH": [["EOF",  "console.log('Provide valid text or text-file to translate.'); return $1;" ],
                     ["SENTENCES EOF", "return {'sentences':$1};"]
                   ],
 

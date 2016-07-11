@@ -37,21 +37,20 @@ var languageRuleMapper = function(targetLangRules, sourceLangParsedData){
 }
 var languageWordMapper = function(targetLangRules, sourceLangParsedData){
     var mappedRules = languageRuleMapper(targetLangRules, sourceLangParsedData);
-    var translatedSentences = _.map(sourceLangParsedData.sentences, function(sentence, index){
+    return _.map(sourceLangParsedData.sentences, function(sentence, index){
       var newSentence = {};
       newSentence.subject = getTargetWord(sentence.subject && (sentence.subject.noun || sentence.subject.pronoun));
       newSentence.verb = getTargetWord(sentence.verb);
       newSentence.object = getTargetWord(sentence.object && (sentence.object.noun || sentence.object.pronoun));
       newSentence.fullstop  = getTargetWord(sentence.fullstop);
-      return applyLanguageRules(newSentence, mappedRules, index).join(' ');
-    });
-    return translatedSentences.join(' ');
+      return applyLanguageRules(newSentence, mappedRules, index);
+    }).join(' ');
 }
 
 var applyLanguageRules = function(newSentence, mappedRules, index){
     return _.reduce(mappedRules[index], function(sentence, partsOfSpeech){
         return sentence.concat(newSentence[partsOfSpeech]);
-    }, []);
+    }, []).join(' ');
 }
 
 var getTargetWord = function(sourceWord){
